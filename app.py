@@ -11,7 +11,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage # Import MIMEImage for attaching images
 from pathlib import Path
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Dict, Optional, Tuple, Union # Import Union
 
 import cv2
 import numpy as np
@@ -52,7 +52,8 @@ ADMIN_EMAIL_ADDRESS: str = os.environ.get("FACEAPP_ADMIN_EMAIL", "projects@archt
 def Logger(message: str) -> None:
     print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] {message}")
 
-def ensure_dir(path: str | Path) -> None:
+# Changed 'str | Path' to 'Union[str, Path]' for broader Python version compatibility
+def ensure_dir(path: Union[str, Path]) -> None:
     Path(path).mkdir(parents=True, exist_ok=True)
 
 def python_time_now() -> str:

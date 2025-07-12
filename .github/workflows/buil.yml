@@ -1,3 +1,4 @@
+# .github/workflows/build_faceapp_exe.yml
 name: Build FaceApp Windows Executable
 
 on:
@@ -27,16 +28,14 @@ jobs:
 
     - name: Build Executable with PyInstaller
       run: |
-        # Adjust the PyInstaller command as per your needs.
-        # Ensure --add-data paths are correct for the Windows environment.
-        # "source;destination" is the syntax for Windows.
-        # Using '^' for line continuation in Windows shell
-        pyinstaller --onefile --windowed ^
-                    --name FaceAppBackend ^
-                    --add-data "templates;templates" ^
-                    --add-data "static;static" ^
-                    --add-data "known_faces;known_faces" ^
-                    --add-data "haarcascade_frontalface_default.xml;." ^
+        # PyInstaller command to create the .exe
+        # Using '`' (backtick) for line continuation in PowerShell (default on windows-latest runners)
+        pyinstaller --onefile --windowed `
+                    --name FaceAppBackend `
+                    --add-data "templates;templates" `
+                    --add-data "static;static" `
+                    --add-data "known_faces;known_faces" `
+                    --add-data "haarcascade_frontalface_default.xml;." `
                     app.py
 
     - name: Upload Executable as Artifact
